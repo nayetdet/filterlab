@@ -32,7 +32,7 @@ export const HomePage = () => {
 
   return (
     <main>
-      <section className="w-full bg-white">
+      <section className="w-full bg-neutral-100">
         <div className="mx-auto grid min-h-[calc(100svh-4rem)] w-full max-w-[1240px] items-center gap-8 px-5 py-12 sm:px-8 sm:py-16 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12">
           <div className="max-w-2xl">
             <p className="text-xs font-semibold tracking-[0.16em] text-muted-foreground uppercase">
@@ -107,7 +107,7 @@ export const HomePage = () => {
       </section>
 
       <div className="mx-auto w-full max-w-[1240px] px-5 sm:px-8">
-        <section className="mt-8 grid gap-8 rounded-2xl bg-zinc-950 p-6 text-zinc-50 sm:p-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
+        <section className="mt-16 grid gap-8 rounded-2xl bg-zinc-950 p-6 text-zinc-50 sm:p-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
           <div>
             <div className="flex items-center gap-3">
               <Sparkles className="size-5 shrink-0 text-zinc-300" />
