@@ -1,6 +1,8 @@
 import katex from 'katex';
+import { BookOpenText, Lightbulb, Sigma, Sparkles } from 'lucide-react';
 import type { Lesson } from '@/data/course';
 import LessonFormula from '@/components/course/lesson/sections/formula';
+import LessonText from '@/components/course/lesson/sections/lesson-text';
 
 type LessonTheoryProps = { lesson: Lesson };
 
@@ -11,23 +13,42 @@ const math = (value: string, displayMode = false) => ({
 export const LessonTheory = ({ lesson }: LessonTheoryProps) => (
   <div className="mt-8 space-y-8">
     <section aria-labelledby="concept-title">
-      <h2 id="concept-title" className="text-lg font-semibold tracking-tight">
+      <h2
+        id="concept-title"
+        className="flex items-center gap-2 text-lg font-semibold tracking-tight"
+      >
+        <BookOpenText
+          className="size-4 text-muted-foreground"
+          aria-hidden="true"
+        />
         A ideia
       </h2>
       <p className="mt-2 max-w-4xl text-base/7 text-muted-foreground">
-        {lesson.concept}
+        <LessonText value={lesson.concept} />
       </p>
       <div className="mt-4 grid gap-6 md:grid-cols-2">
         <div className="bg-muted/40 p-5">
-          <h3 className="text-sm font-semibold">Intuição</h3>
+          <h3 className="flex items-center gap-2 text-sm font-semibold">
+            <Lightbulb
+              className="size-4 text-muted-foreground"
+              aria-hidden="true"
+            />
+            Intuição
+          </h3>
           <p className="mt-2 text-sm/6 text-muted-foreground">
-            {lesson.intuition}
+            <LessonText value={lesson.intuition} />
           </p>
         </div>
         <div className="p-5">
-          <h3 className="text-sm font-semibold">O que muda na prática</h3>
+          <h3 className="flex items-center gap-2 text-sm font-semibold">
+            <Sparkles
+              className="size-4 text-muted-foreground"
+              aria-hidden="true"
+            />
+            O que muda na prática
+          </h3>
           <p className="mt-2 text-sm/6 text-muted-foreground">
-            {lesson.consequence}
+            <LessonText value={lesson.consequence} />
           </p>
         </div>
       </div>
@@ -35,7 +56,11 @@ export const LessonTheory = ({ lesson }: LessonTheoryProps) => (
 
     <section aria-labelledby="formula-title">
       <div className="mb-3">
-        <h2 id="formula-title" className="text-lg font-semibold tracking-tight">
+        <h2
+          id="formula-title"
+          className="flex items-center gap-2 text-lg font-semibold tracking-tight"
+        >
+          <Sigma className="size-4 text-muted-foreground" aria-hidden="true" />
           Relação matemática
         </h2>
         <p className="mt-1 text-sm text-muted-foreground">
@@ -57,7 +82,7 @@ export const LessonTheory = ({ lesson }: LessonTheoryProps) => (
               </div>
             </div>
             <p className="mt-2 text-sm/6 text-muted-foreground">
-              {symbol.meaning}
+              <LessonText value={symbol.meaning} />
             </p>
           </div>
         ))}
@@ -66,7 +91,7 @@ export const LessonTheory = ({ lesson }: LessonTheoryProps) => (
       <div className="mt-5 bg-muted/35 p-5 sm:p-6">
         <h3 className="text-sm font-semibold">Exemplo resolvido</h3>
         <p className="mt-2 text-sm/6 text-muted-foreground">
-          {lesson.example.question}
+          <LessonText value={lesson.example.question} />
         </p>
         <ol className="mt-4 space-y-4">
           {lesson.example.steps.map((step, index) => (
@@ -79,7 +104,7 @@ export const LessonTheory = ({ lesson }: LessonTheoryProps) => (
               </span>
               <div className="min-w-0">
                 <p className="text-sm/6 text-muted-foreground">
-                  {step.explanation}
+                  <LessonText value={step.explanation} />
                 </p>
                 {step.equation && (
                   <div className="mt-2 overflow-x-auto">
@@ -90,7 +115,9 @@ export const LessonTheory = ({ lesson }: LessonTheoryProps) => (
             </li>
           ))}
         </ol>
-        <p className="mt-4 text-sm/6 font-medium">{lesson.example.result}</p>
+        <p className="mt-4 text-sm/6 font-medium">
+          <LessonText value={lesson.example.result} />
+        </p>
       </div>
 
       <details className="group mt-4">
@@ -111,7 +138,7 @@ export const LessonTheory = ({ lesson }: LessonTheoryProps) => (
               </span>
               <div className="min-w-0">
                 <p className="text-sm/6 text-muted-foreground">
-                  {step.explanation}
+                  <LessonText value={step.explanation} />
                 </p>
                 {step.equation && (
                   <div className="mt-2 overflow-x-auto">

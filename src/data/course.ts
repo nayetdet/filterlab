@@ -107,7 +107,7 @@ export const courseModules: CourseModule[] = [
         derivation: [
           {
             explanation:
-              'O instante associado ao índice n é n períodos de amostragem. Como T_s=1/f_s, esse instante também pode ser escrito como n/f_s.',
+              'O instante associado ao índice n é n períodos de amostragem. Como \\(T_s=1/f_s\\), esse instante também pode ser escrito como \\(n/f_s\\).',
             equation: 't_n=nT_s=\\frac{n}{f_s}',
           },
           {
@@ -137,7 +137,7 @@ export const courseModules: CourseModule[] = [
             },
           ],
           result:
-            'x[4] é aproximadamente 1,27. O valor é menor que a amplitude 2 porque a senoide ainda está subindo em direção ao pico.',
+            '\\(x[4]\\) é aproximadamente \\(1{,}27\\). O valor é menor que a amplitude \\(2\\) porque a senoide ainda está subindo em direção ao pico.',
         },
         prompt: 'Ajuste a frequência e acompanhe o espaçamento das amostras.',
         control: {
@@ -154,7 +154,7 @@ export const courseModules: CourseModule[] = [
         id: 'signal-parameters',
         title: 'Parâmetros de uma senoide',
         concept:
-          'Uma senoide é definida por amplitude, frequência e fase. A amplitude A controla o tamanho dos picos, f controla a rapidez das oscilações, e φ determina onde o ciclo começa. Em sinais amostrados, f_s também define o intervalo entre pontos.',
+          'Uma senoide é definida por amplitude, frequência e fase. A amplitude \\(A\\) controla o tamanho dos picos, \\(f\\) controla a rapidez das oscilações, e \\(\\varphi\\) determina onde o ciclo começa. Em sinais amostrados, \\(f_s\\) também define o intervalo entre pontos.',
         intuition:
           'Imagine a senoide como uma roda girando. A amplitude aumenta ou diminui a altura da trajetória, a frequência muda a velocidade da roda e a fase escolhe a posição inicial do ponteiro.',
         consequence:
@@ -197,7 +197,7 @@ export const courseModules: CourseModule[] = [
         derivation: [
           {
             explanation:
-              'Uma volta completa da fase mede 2π radianos e corresponde a um ciclo.',
+              'Uma volta completa da fase mede \\(2\\pi\\) radianos e corresponde a um ciclo.',
             equation: '\\theta(t)=2\\pi ft+\\varphi',
           },
           {
@@ -212,14 +212,16 @@ export const courseModules: CourseModule[] = [
           },
         ],
         example: {
-          question: 'Para A=1,5, f=4 Hz, φ=π/2 e t=0, qual é o valor inicial?',
+          question:
+            'Para \\(A=1{,}5\\), \\(f=4\\text{ Hz}\\), \\(\\varphi=\\frac{\\pi}{2}\\) e \\(t=0\\), qual é o valor inicial?',
           steps: [
             {
-              explanation: 'No instante inicial, o termo 2πft vale zero.',
+              explanation:
+                'No instante inicial, o termo \\(2\\pi ft\\) vale zero.',
               equation: 'x(0)=1{,}5\\sin(0+\\frac{\\pi}{2})',
             },
             {
-              explanation: 'O seno de π/2 é 1.',
+              explanation: 'O seno de \\(\\frac{\\pi}{2}\\) é \\(1\\).',
               equation: 'x(0)=1{,}5\\cdot1',
             },
           ],
@@ -241,7 +243,7 @@ export const courseModules: CourseModule[] = [
         id: 'sampling',
         title: 'Amostragem',
         concept:
-          'A amostragem converte um sinal contínuo x_c(t) em uma sequência x[n] ao medir o sinal em instantes separados por T_s. A taxa f_s é o inverso desse intervalo e é expressa em amostras por segundo.',
+          'A amostragem converte um sinal contínuo \\(x_c(t)\\) em uma sequência \\(x[n]\\) ao medir o sinal em instantes separados por \\(T_s\\). A taxa \\(f_s\\) é o inverso desse intervalo e é expressa em amostras por segundo.',
         intuition:
           'Aumentar a taxa de amostragem equivale a tirar fotografias com mais frequência. Os pontos ficam mais próximos e representam melhor as mudanças rápidas do sinal.',
         consequence:
@@ -271,14 +273,14 @@ export const courseModules: CourseModule[] = [
             name: 'Período de amostragem',
             unit: 's',
             meaning:
-              'Intervalo de tempo entre medidas consecutivas. Um T_s menor gera mais amostras por segundo.',
+              'Intervalo de tempo entre medidas consecutivas. Um \\(T_s\\) menor gera mais amostras por segundo.',
           },
           {
             symbol: 'f_s',
             name: 'Taxa de amostragem',
             unit: 'Hz ou amostras/s',
             meaning:
-              'Quantidade de medidas por segundo. Aumentar f_s reduz T_s.',
+              'Quantidade de medidas por segundo. Aumentar \\(f_s\\) reduz \\(T_s\\).',
           },
         ],
         derivation: [
@@ -294,13 +296,13 @@ export const courseModules: CourseModule[] = [
           },
           {
             explanation:
-              'Como T_s=1/f_s, o instante também pode ser expresso com a taxa de amostragem.',
+              'Como \\(T_s=\\frac{1}{f_s}\\), o instante também pode ser expresso com a taxa de amostragem.',
             equation: 'x[n]=x_c\\left(\\frac{n}{f_s}\\right)',
           },
         ],
         example: {
           question:
-            'Com f_s=8000 amostras/s, quanto tempo separa duas amostras?',
+            'Com \\(f_s=8000\\text{ amostras/s}\\), quanto tempo separa duas amostras?',
           steps: [
             {
               explanation: 'Use o inverso da taxa.',
@@ -313,7 +315,8 @@ export const courseModules: CourseModule[] = [
           ],
           result: 'Cada amostra é capturada 0,125 ms depois da anterior.',
         },
-        prompt: 'Ajuste f_s e compare a curva contínua aos pontos medidos.',
+        prompt:
+          'Ajuste \\(f_s\\) e compare a curva contínua aos pontos medidos.',
         control: {
           label: 'Taxa de amostragem',
           symbol: 'f_s',
@@ -332,7 +335,7 @@ export const courseModules: CourseModule[] = [
         intuition:
           'Cada amostra contribui para a curva reconstruída por meio de uma função sinc. Quando as amostras são densas o bastante, essas contribuições se somam para recuperar o sinal original.',
         consequence:
-          'A reconstrução ideal exige banda limitada e uma taxa superior a 2f_max. Sinais reais não são perfeitamente limitados, por isso sistemas práticos usam filtros anti-aliasing e uma margem acima do limite teórico.',
+          'A reconstrução ideal exige banda limitada e uma taxa superior a \\(2f_{\\max}\\). Sinais reais não são perfeitamente limitados, por isso sistemas práticos usam filtros anti-aliasing e uma margem acima do limite teórico.',
         formula:
           'f_s>2f_{\\max},\\qquad x_c(t)=\\sum_{n=-\\infty}^{\\infty}x[n]\\operatorname{sinc}\\left(\\frac{t-nT_s}{T_s}\\right)',
         symbols: [
@@ -341,7 +344,7 @@ export const courseModules: CourseModule[] = [
             name: 'Taxa de amostragem',
             unit: 'Hz',
             meaning:
-              'Define a distância entre as réplicas do espectro. Deve superar 2f_max para permitir reconstrução ideal.',
+              'Define a distância entre as réplicas do espectro. Deve superar \\(2f_{\\max}\\) para permitir reconstrução ideal.',
           },
           {
             symbol: 'f_{\\max}',
@@ -420,7 +423,7 @@ export const courseModules: CourseModule[] = [
         id: 'aliasing',
         title: 'Aliasing',
         concept:
-          'Aliasing é a sobreposição de frequências que ocorre quando a taxa de amostragem é insuficiente. Depois de amostradas, frequências separadas por múltiplos de f_s podem produzir a mesma sequência digital.',
+          'Aliasing é a sobreposição de frequências que ocorre quando a taxa de amostragem é insuficiente. Depois de amostradas, frequências separadas por múltiplos de \\(f_s\\) podem produzir a mesma sequência digital.',
         intuition:
           'É parecido com uma roda filmada em poucos quadros por segundo. O movimento entre quadros não foi registrado, então outra velocidade parece explicar os mesmos quadros.',
         consequence:
@@ -445,7 +448,8 @@ export const courseModules: CourseModule[] = [
             symbol: 'k',
             name: 'Número da réplica',
             unit: 'inteiro',
-            meaning: 'Escolhe o múltiplo de f_s mais próximo de f_0.',
+            meaning:
+              'Escolhe o múltiplo de \\(f_s\\) mais próximo de \\(f_0\\).',
           },
           {
             symbol: 'f_{\\text{alias}}',
@@ -464,7 +468,7 @@ export const courseModules: CourseModule[] = [
           },
           {
             explanation:
-              'O termo 2πkn corresponde a voltas inteiras e não muda os valores amostrados.',
+              'O termo \\(2\\pi kn\\) corresponde a voltas inteiras e não muda os valores amostrados.',
             equation: '\\sin(2\\pi kn+\\theta)=\\sin(\\theta)',
           },
           {
@@ -475,7 +479,7 @@ export const courseModules: CourseModule[] = [
         ],
         example: {
           question:
-            'Com f_s=8 kHz, que frequência aparece ao amostrar um tom de 7 kHz?',
+            'Com \\(f_s=8\\text{ kHz}\\), que frequência aparece ao amostrar um tom de \\(7\\text{ kHz}\\)?',
           steps: [
             {
               explanation: 'A réplica mais próxima usa k=1.',
@@ -546,7 +550,7 @@ export const courseModules: CourseModule[] = [
           },
           {
             explanation:
-              'Um ciclo corresponde a 2π radianos. Multiplique os ciclos por segundo por 2π radianos por ciclo.',
+              'Um ciclo corresponde a \\(2\\pi\\) radianos. Multiplique os ciclos por segundo por \\(2\\pi\\) radianos por ciclo.',
             equation: '\\omega=2\\pi f',
           },
         ],
@@ -566,7 +570,7 @@ export const courseModules: CourseModule[] = [
             },
           ],
           result:
-            'O tom completa um ciclo a cada 2 ms e sua fase avança 1000π rad/s.',
+            'O tom completa um ciclo a cada \\(2\\text{ ms}\\) e sua fase avança \\(1000\\pi\\text{ rad/s}\\).',
         },
         prompt: 'Ajuste a frequência e observe o período de um ciclo.',
         control: {
@@ -639,12 +643,12 @@ export const courseModules: CourseModule[] = [
           steps: [
             {
               explanation:
-                'A fase da primeira componente é π/2, então ela vale 1.',
+                'A fase da primeira componente é \\(\\frac{\\pi}{2}\\), então ela vale \\(1\\).',
               equation: 'x_1=1\\sin(2\\pi\\cdot100\\cdot0{,}0025)=1',
             },
             {
               explanation:
-                'A fase da segunda componente é 3π/2, então ela vale -0,5.',
+                'A fase da segunda componente é \\(\\frac{3\\pi}{2}\\), então ela vale \\(-0{,}5\\).',
               equation: 'x_2=0{,}5\\sin(2\\pi\\cdot300\\cdot0{,}0025)=-0{,}5',
             },
           ],
@@ -725,13 +729,13 @@ export const courseModules: CourseModule[] = [
           },
           {
             explanation:
-              'O módulo de X[k], com normalização adequada, fornece a amplitude naquele bin.',
+              'O módulo de \\(X[k]\\), com normalização adequada, fornece a amplitude naquele bin.',
             equation: 'A[k]=\\frac{2}{N}|X[k]|',
           },
         ],
         example: {
           question:
-            'Para f_s=8000 Hz e N=8, qual frequência corresponde ao bin k=1?',
+            'Para \\(f_s=8000\\text{ Hz}\\) e \\(N=8\\), qual frequência corresponde ao bin \\(k=1\\)?',
           steps: [
             {
               explanation: 'Calcule o espaçamento entre bins.',
@@ -788,7 +792,7 @@ export const courseModules: CourseModule[] = [
             name: 'Número de amostras',
             unit: 'amostras',
             meaning:
-              'Aumentá-lo com f_s fixa prolonga a observação e reduz Δf.',
+              'Aumentá-lo com \\(f_s\\) fixa prolonga a observação e reduz \\(\\Delta f\\).',
           },
           {
             symbol: 'T_{\\text{obs}}',
@@ -800,7 +804,7 @@ export const courseModules: CourseModule[] = [
         derivation: [
           {
             explanation:
-              'A DFT divide a faixa de 0 a f_s em N intervalos iguais.',
+              'A DFT divide a faixa de 0 a \\(f_s\\) em \\(N\\) intervalos iguais.',
             equation: '\\Delta f=\\frac{f_s}{N}',
           },
           {
@@ -815,7 +819,8 @@ export const courseModules: CourseModule[] = [
           },
         ],
         example: {
-          question: 'Qual é o espaçamento entre bins para f_s=16 kHz e N=1024?',
+          question:
+            'Qual é o espaçamento entre bins para \\(f_s=16\\text{ kHz}\\) e \\(N=1024\\)?',
           steps: [
             {
               explanation: 'Use a taxa em hertz e o número de amostras.',
@@ -1163,7 +1168,7 @@ export const courseModules: CourseModule[] = [
         id: 'impulse',
         title: 'Resposta ao impulso',
         concept:
-          'A resposta ao impulso h[n] é a saída de um sistema quando a entrada é o impulso unitário δ[n]. Em um sistema linear e invariante no tempo, h[n] determina completamente a relação entre entrada e saída.',
+          'A resposta ao impulso \\(h[n]\\) é a saída de um sistema quando a entrada é o impulso unitário \\(\\delta[n]\\). Em um sistema linear e invariante no tempo, \\(h[n]\\) determina completamente a relação entre entrada e saída.',
         intuition:
           'O impulso testa a reação do filtro em um único instante. A resposta obtida pode ser deslocada e somada para prever o efeito sobre qualquer sequência.',
         consequence:
@@ -1333,7 +1338,7 @@ export const courseModules: CourseModule[] = [
         id: 'convolution-discrete',
         title: 'Convolução discreta',
         concept:
-          'A convolução discreta soma produtos entre amostras da entrada e coeficientes da resposta ao impulso. Para cada saída, uma cópia invertida e deslocada de h[k] se alinha com x[n-k].',
+          'A convolução discreta soma produtos entre amostras da entrada e coeficientes da resposta ao impulso. Para cada saída, uma cópia invertida e deslocada de \\(h[k]\\) se alinha com \\(x[n-k]\\).',
         intuition:
           'Deslize a janela de coeficientes sobre a entrada. Em cada posição, multiplique os valores alinhados e some os produtos para obter uma amostra da saída.',
         consequence:
@@ -1389,7 +1394,7 @@ export const courseModules: CourseModule[] = [
           },
         ],
         example: {
-          question: 'Calcule y[1] para x=[1,2,0] e h=[1,1].',
+          question: 'Calcule \\(y[1]\\) para \\(x=[1,2,0]\\) e \\(h=[1,1]\\).',
           steps: [
             {
               explanation: 'Alinhe h[0] com x[1] e h[1] com x[0].',

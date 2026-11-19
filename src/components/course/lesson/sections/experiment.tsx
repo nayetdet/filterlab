@@ -3,6 +3,7 @@ import type { CourseChart as CourseChartData } from '@/charts/course';
 import type { Lesson } from '@/data/course';
 import { Slider } from '@/components/ui/slider';
 import CourseChart from '@/components/charts/course/chart';
+import LessonText from '@/components/course/lesson/sections/lesson-text';
 
 type LessonExperimentProps = {
   lesson: Lesson;
@@ -38,7 +39,7 @@ export const LessonExperiment = ({
             Explore no gráfico
           </h2>
           <p className="mt-2 text-base/7 text-muted-foreground">
-            {lesson.prompt}
+            <LessonText value={lesson.prompt} />
           </p>
         </div>
         <div className="w-full rounded-2xl bg-muted/40 p-4 sm:p-5">
