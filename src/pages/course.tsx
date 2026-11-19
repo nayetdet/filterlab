@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import LessonContent from '@/components/course/lesson/content';
 import CourseMap from '@/components/course/navigation/course-map';
-import { createCourseChartData } from '@/charts/course';
+import { createCourseChart } from '@/charts/course';
 import { courseLessons, courseModules } from '@/data/course';
 import { useCourseStore } from '@/stores/course';
 import { useMapHeight } from '@/hooks/use-map-height';
@@ -35,7 +35,7 @@ export const CoursePage = () => {
   const previousLesson = courseLessons[lessonIndex - 1];
   const nextLesson = courseLessons[lessonIndex + 1];
   const lessonCompleted = completedLessons.includes(lesson.id);
-  const chartData = createCourseChartData(lesson.kind, experimentValue);
+  const chart = createCourseChart(lesson, experimentValue);
   const completeAndAdvance = () => {
     completeLesson();
     if (nextLesson) {
@@ -65,7 +65,7 @@ export const CoursePage = () => {
         hasPrevious={Boolean(previousLesson)}
         hasNext={Boolean(nextLesson)}
         experimentValue={experimentValue}
-        chartData={chartData}
+        chart={chart}
         onExperimentChange={setExperimentValue}
         onPrevious={() => previousLesson && selectLesson(previousLesson.id)}
         onComplete={completeAndAdvance}

@@ -32,7 +32,6 @@ export const LessonHeader = ({
     <h1 className="text-3xl font-semibold tracking-tight sm:text-4xl">
       {lesson.title}
     </h1>
-    <p className="mt-5 max-w-4xl text-lg/8">{lesson.concept}</p>
   </>
 );
 

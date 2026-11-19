@@ -1,6 +1,6 @@
 import type { Ref } from 'react';
 import type { CourseModule, Lesson } from '@/data/course';
-import type { CourseChartSample } from '@/charts/course';
+import type { CourseChart as CourseChartData } from '@/charts/course';
 import LessonNavigation from '@/components/course/navigation/lesson-navigation';
 import LessonExperiment from '@/components/course/lesson/sections/experiment';
 import LessonHeader from '@/components/course/lesson/sections/header';
@@ -18,7 +18,7 @@ type LessonContentProps = {
   hasPrevious: boolean;
   hasNext: boolean;
   experimentValue: number;
-  chartData: CourseChartSample[];
+  chart: CourseChartData;
   onExperimentChange: (value: number) => void;
   onPrevious: () => void;
   onComplete: () => void;
@@ -47,7 +47,7 @@ export const LessonContent = ({
   hasPrevious,
   hasNext,
   experimentValue,
-  chartData,
+  chart,
   onExperimentChange,
   onPrevious,
   onComplete,
@@ -65,7 +65,7 @@ export const LessonContent = ({
     <LessonExperiment
       lesson={lesson}
       value={experimentValue}
-      data={chartData}
+      chart={chart}
       onChange={onExperimentChange}
     />
     <div

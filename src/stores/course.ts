@@ -3,18 +3,24 @@ import { createJSONStorage, persist } from 'zustand/middleware';
 
 export type LessonId =
   | 'signals'
+  | 'signal-parameters'
   | 'sampling'
+  | 'sampling-reconstruction'
   | 'aliasing'
   | 'frequency'
+  | 'frequency-components'
   | 'spectrum'
+  | 'fft-resolution'
   | 'lowpass'
   | 'highpass'
+  | 'filter-bands'
   | 'fir'
   | 'impulse'
   | 'convolution-discrete'
   | 'convolution-continuous'
   | 'windows'
   | 'iir'
+  | 'iir-stability'
   | 'phase';
 
 type CourseState = {
