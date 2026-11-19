@@ -1,17 +1,19 @@
 import { Check, ChevronDown } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { courseLessons, courseModules } from '@/data/course';
-import type { LessonId } from '@/stores/course-store';
+import type { LessonId } from '@/stores/course';
 
 type ModuleListProps = {
   activeLesson: LessonId;
   completedLessons: LessonId[];
+  mobileExpanded: boolean;
   onSelectLesson: (lessonId: LessonId) => void;
 };
 
 export const ModuleList = ({
   activeLesson,
   completedLessons,
+  mobileExpanded,
   onSelectLesson,
 }: ModuleListProps) => {
   const [hasMoreBelow, setHasMoreBelow] = useState(false);
@@ -42,11 +44,14 @@ export const ModuleList = ({
   }, []);
 
   return (
-    <div className="relative min-h-0 lg:flex-1">
+    <div
+      className={`relative min-h-0 lg:flex-1 ${mobileExpanded ? 'block' : 'hidden'} lg:block`}
+    >
       <nav
         ref={listRef}
+        id="course-module-list"
         aria-label="Lista de módulos e aulas"
-        className="divide-y divide-border/70 pb-3 lg:h-full lg:overflow-y-auto lg:overscroll-contain lg:pr-4"
+        className="max-h-[55svh] divide-y divide-border/70 overflow-y-auto overscroll-contain pb-3 lg:h-full lg:max-h-none lg:pr-4"
       >
         {courseModules.map((module, moduleNumber) => (
           <section key={module.title} className="space-y-3 py-5 first:pt-0">
@@ -95,7 +100,7 @@ export const ModuleList = ({
         ))}
       </nav>
       {hasMoreBelow && (
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 hidden justify-center bg-linear-to-t from-background via-background/95 to-transparent pt-8 pb-1 lg:flex">
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center bg-linear-to-t from-background via-background/95 to-transparent pt-8 pb-1">
           <button
             type="button"
             className="pointer-events-auto flex cursor-pointer items-center gap-1.5 rounded-full bg-background/90 px-3 py-1.5 text-xs font-medium text-muted-foreground"

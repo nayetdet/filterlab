@@ -2,6 +2,9 @@
 
 - Always write code and project documentation in English.
 - Never modify `src/index.css`.
+- Design and review every interface change for mobile as well as desktop. Keep
+  layouts, charts, and controls usable on narrow screens and avoid horizontal
+  overflow.
 - Declare React components as named exported constants, such as
   `export const Component = () => {}`. Also provide a default export for every
   React component.

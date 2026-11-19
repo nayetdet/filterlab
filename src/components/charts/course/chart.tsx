@@ -35,13 +35,14 @@ export const CourseChart = ({
             dataKey="x"
             tickLine={false}
             axisLine={false}
-            tick={{ fontSize: 11 }}
+            interval="preserveStartEnd"
+            tick={{ fontSize: 10 }}
           />
           <YAxis
             tickLine={false}
             axisLine={false}
-            width={32}
-            tick={{ fontSize: 11 }}
+            width={28}
+            tick={{ fontSize: 10 }}
           />
           <ReferenceLine y={0} stroke="#71717a" />
           {reference && (

@@ -1,4 +1,4 @@
-import type { LessonId } from '@/stores/course-store';
+import type { LessonId } from '@/stores/course';
 import { courseModules } from '@/data/course';
 
 type ModuleProgressProps = {

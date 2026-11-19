@@ -1,4 +1,4 @@
-import type { LessonId } from '@/stores/course-store';
+import type { LessonId } from '@/stores/course';
 
 export type LessonKind =
   | 'signal'

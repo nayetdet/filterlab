@@ -30,11 +30,17 @@ export const ResetProgressDialog = ({
             </DialogPrimitive.Description>
           </div>
         </div>
-        <div className="mt-6 flex justify-end gap-2">
+        <div className="mt-6 flex flex-col-reverse justify-end gap-2 sm:flex-row">
           <DialogPrimitive.Close asChild>
-            <Button variant="secondary">Cancelar</Button>
+            <Button className="w-full sm:w-auto" variant="secondary">
+              Cancelar
+            </Button>
           </DialogPrimitive.Close>
-          <Button variant="destructive" onClick={onConfirm}>
+          <Button
+            className="w-full sm:w-auto"
+            variant="destructive"
+            onClick={onConfirm}
+          >
             Reiniciar curso
           </Button>
         </div>

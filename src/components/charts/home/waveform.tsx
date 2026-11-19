@@ -19,7 +19,7 @@ export const WaveformChart = () => (
       <span>Forma de onda</span>
       <span>Tempo</span>
     </div>
-    <div className="h-[260px] w-full sm:h-[340px] lg:h-[400px]">
+    <div className="h-[220px] w-full sm:h-[300px] lg:h-[400px]">
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart
           data={signalData}

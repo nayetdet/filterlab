@@ -1,7 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import Layout from '@/components/layout/layout';
-import CoursePage from '@/pages/course-page';
-import HomePage from '@/pages/home-page';
+import CoursePage from '@/pages/course';
+import HomePage from '@/pages/home';
 
 export const AppRoutes = () => (
   <BrowserRouter>

@@ -27,7 +27,7 @@ export const LessonNavigation = ({
       </p>
       <p className="mt-1 text-sm/6 text-muted-foreground">{description}</p>
     </div>
-    <div className="ml-auto flex w-full flex-wrap justify-end gap-2 sm:w-auto">
+    <div className="ml-auto grid w-full grid-cols-1 gap-2 sm:flex sm:w-auto">
       <Button
         variant="secondary"
         className="h-11 min-w-40 gap-2 px-5"

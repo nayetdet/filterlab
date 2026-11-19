@@ -14,7 +14,7 @@ export const ChartPreviews = () => (
         Tempo, frequência e filtragem se conectam ao longo das aulas.
       </p>
     </div>
-    <div className="grid gap-4 lg:grid-cols-3">
+    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
       {previewCharts.map((chart) => {
         const Icon = chart.icon;
 

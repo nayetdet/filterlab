@@ -3,7 +3,7 @@ import LessonContent from '@/components/course/lesson/content';
 import CourseMap from '@/components/course/navigation/course-map';
 import { createCourseChartData } from '@/charts/course';
 import { courseLessons, courseModules } from '@/data/course';
-import { useCourseStore } from '@/stores/course-store';
+import { useCourseStore } from '@/stores/course';
 import { useMapHeight } from '@/hooks/use-map-height';
 
 export const CoursePage = () => {

@@ -1,11 +1,11 @@
-import { RotateCcw } from 'lucide-react';
+import { ChevronDown, RotateCcw } from 'lucide-react';
 import { useState, type Ref } from 'react';
 import { Button } from '@/components/ui/button';
 import ModuleList from '@/components/course/navigation/module-list';
 import ModuleProgress from '@/components/course/navigation/module-progress';
 import ResetProgressDialog from '@/components/course/navigation/reset-progress-dialog';
 import { courseLessons } from '@/data/course';
-import { useCourseStore, type LessonId } from '@/stores/course-store';
+import { useCourseStore, type LessonId } from '@/stores/course';
 
 export type CourseMapProps = {
   mapRef: Ref<HTMLElement>;
@@ -23,6 +23,7 @@ export const CourseMap = ({
   const completedLessons = useCourseStore((state) => state.completedLessons);
   const resetProgress = useCourseStore((state) => state.resetProgress);
   const [resetPending, setResetPending] = useState(false);
+  const [mobileExpanded, setMobileExpanded] = useState(false);
 
   return (
     <aside
@@ -53,10 +54,27 @@ export const CourseMap = ({
         completedLessons={completedLessons}
         currentModuleIndex={currentModuleIndex}
       />
+      <Button
+        type="button"
+        variant="ghost"
+        className="h-11 w-full justify-between px-3 lg:hidden"
+        aria-expanded={mobileExpanded}
+        aria-controls="course-module-list"
+        onClick={() => setMobileExpanded((expanded) => !expanded)}
+      >
+        {mobileExpanded ? 'Ocultar aulas' : 'Ver módulos e aulas'}
+        <ChevronDown
+          className={`transition-transform ${mobileExpanded ? 'rotate-180' : ''}`}
+        />
+      </Button>
       <ModuleList
         activeLesson={activeLesson}
         completedLessons={completedLessons}
-        onSelectLesson={onSelectLesson}
+        mobileExpanded={mobileExpanded}
+        onSelectLesson={(lessonId) => {
+          onSelectLesson(lessonId);
+          setMobileExpanded(false);
+        }}
       />
     </aside>
   );

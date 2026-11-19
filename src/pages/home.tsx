@@ -4,7 +4,7 @@ import CourseRoadmap from '@/components/home/course-roadmap';
 import Hero from '@/components/home/hero';
 import LearningSteps from '@/components/home/learning-steps';
 import LearningOutcomes from '@/components/home/learning-outcomes';
-import { useCourseStore } from '@/stores/course-store';
+import { useCourseStore } from '@/stores/course';
 
 export const HomePage = () => {
   const completedLessons = useCourseStore((state) => state.completedLessons);
