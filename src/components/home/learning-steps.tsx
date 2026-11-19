@@ -1,22 +1,19 @@
 import { learningSteps } from '@/data/home';
 
 export const LearningSteps = () => (
-  <section className="mt-20">
+  <section>
     <div className="max-w-2xl">
-      <p className="text-sm font-semibold text-muted-foreground">
-        APRENDIZADO GUIADO
-      </p>
-      <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+      <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
         Conceito, fórmula e experimento na mesma aula.
       </h2>
-      <p className="mt-4 text-base/7 text-muted-foreground">
+      <p className="mt-3 text-base/7 text-muted-foreground sm:mt-4">
         Cada etapa conecta a explicação ao que você vê. Teste uma ideia e
         acompanhe suas consequências.
       </p>
     </div>
-    <div className="mt-8 grid gap-4 md:grid-cols-3">
+    <div className="mt-7 grid gap-4 md:mt-8 md:grid-cols-3">
       {learningSteps.map(({ title, description, icon: Icon }, index) => (
-        <article key={title} className="rounded-2xl bg-muted/50 p-5 sm:p-6">
+        <article key={title} className="rounded-2xl bg-muted/40 p-5 sm:p-6">
           <div className="flex items-start justify-between gap-4">
             <p className="text-sm font-medium text-muted-foreground tabular-nums">
               ETAPA {index + 1}

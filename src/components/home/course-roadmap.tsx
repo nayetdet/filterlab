@@ -2,11 +2,11 @@ import { BookOpen } from 'lucide-react';
 import { courseModules } from '@/data/course';
 
 export const CourseRoadmap = () => (
-  <section className="mt-20 pb-24">
+  <section>
     <div className="mb-6 flex items-end justify-between gap-4">
       <div>
-        <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
-          O percurso
+        <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+          O percurso do curso
         </h2>
         <p className="mt-2 text-muted-foreground">
           Do primeiro sinal aos filtros digitais.

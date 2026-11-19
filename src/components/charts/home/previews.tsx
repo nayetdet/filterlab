@@ -2,15 +2,12 @@ import { Line, LineChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { previewCharts } from '@/charts/home';
 
 export const ChartPreviews = () => (
-  <section className="mt-20">
+  <section>
     <div className="mb-7 max-w-2xl">
-      <p className="text-sm font-semibold text-muted-foreground">
-        GRÁFICOS INTERATIVOS
-      </p>
-      <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
+      <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
         Veja os conceitos ganharem forma.
       </h2>
-      <p className="mt-3 text-base/7 text-muted-foreground">
+      <p className="mt-3 text-base/7 text-muted-foreground sm:mt-4">
         Tempo, frequência e filtragem se conectam ao longo das aulas.
       </p>
     </div>
@@ -38,7 +35,7 @@ export const ChartPreviews = () => (
                 <Icon className="size-[18px]" />
               </span>
             </div>
-            <div className="mt-4 h-36">
+            <div className="mt-4 h-40 sm:h-44">
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart
                   data={chart.data}

@@ -16,9 +16,9 @@ export const HomePage = () => {
         completedCount={completedLessons.length}
         onContinue={() => navigate('/course')}
       />
-      <div className="mx-auto w-full max-w-[1240px] px-5 sm:px-8">
-        <LearningOutcomes />
+      <div className="mx-auto flex w-full max-w-[1240px] flex-col gap-16 px-5 py-16 sm:gap-20 sm:px-8 sm:py-20 lg:gap-24">
         <ChartPreviews />
+        <LearningOutcomes />
         <LearningSteps />
         <CourseRoadmap />
       </div>

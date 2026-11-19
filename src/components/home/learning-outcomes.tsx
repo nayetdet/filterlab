@@ -1,23 +1,23 @@
-import { CheckCircle2, Sparkles } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
 import { outcomes } from '@/data/home';
 
 export const LearningOutcomes = () => (
-  <section className="mt-16 grid gap-8 rounded-2xl bg-zinc-950 p-6 text-zinc-50 sm:p-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
+  <section className="grid gap-6 rounded-2xl bg-muted/40 p-6 sm:gap-8 sm:p-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
     <div>
-      <div className="flex items-center gap-3">
-        <Sparkles className="size-5 shrink-0 text-zinc-300" />
-        <h2 className="text-2xl font-semibold tracking-tight">
-          O que você vai aprender a fazer
-        </h2>
-      </div>
-      <p className="mt-3 text-sm/6 text-zinc-400">
+      <h2 className="text-2xl font-semibold tracking-tight sm:text-3xl">
+        O que você vai aprender a fazer
+      </h2>
+      <p className="mt-3 text-sm/6 text-muted-foreground sm:text-base/7">
         Conectar os cálculos ao resultado que você ouve e observa.
       </p>
     </div>
     <ul className="grid gap-3 sm:grid-cols-2">
       {outcomes.map((outcome) => (
-        <li key={outcome} className="flex gap-3 text-sm/6 text-zinc-200">
-          <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-zinc-400" />
+        <li
+          key={outcome}
+          className="flex gap-3 text-sm/6 text-foreground sm:text-base/6"
+        >
+          <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
           <span>{outcome}</span>
         </li>
       ))}
