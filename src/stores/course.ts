@@ -55,7 +55,7 @@ export const useCourseStore = create<CourseState>()(
         }),
     }),
     {
-      name: 'filterlab-learning-progress',
+      name: 'wave-mage-learning-progress',
       storage: createJSONStorage(() => localStorage),
     },
   ),

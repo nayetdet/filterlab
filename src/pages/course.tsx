@@ -1,11 +1,14 @@
+import { useState } from 'react';
 import LessonContent from '@/components/course/lesson/content';
 import CourseMap from '@/components/course/navigation/course-map';
+import CourseCompletionDialog from '@/components/course/navigation/course-completion-dialog';
 import { createCourseChart } from '@/charts/course';
 import { courseLessons, courseModules } from '@/data/course';
 import { useCourseStore } from '@/stores/course';
 import { useScrollReset } from '@/hooks/use-scroll-reset';
 
 export const CoursePage = () => {
+  const [completionOpen, setCompletionOpen] = useState(false);
   const {
     activeLesson,
     completedLessons,
@@ -39,6 +42,8 @@ export const CoursePage = () => {
     completeLesson();
     if (nextLesson) {
       selectLesson(nextLesson.id);
+    } else {
+      setCompletionOpen(true);
     }
   };
 
@@ -64,6 +69,10 @@ export const CoursePage = () => {
         onPrevious={() => previousLesson && selectLesson(previousLesson.id)}
         onComplete={completeAndAdvance}
         onNext={() => nextLesson && selectLesson(nextLesson.id)}
+      />
+      <CourseCompletionDialog
+        open={completionOpen}
+        onOpenChange={setCompletionOpen}
       />
     </main>
   );
