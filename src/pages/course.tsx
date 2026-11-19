@@ -3,6 +3,7 @@ import CourseMap from '@/components/course/navigation/course-map';
 import { createCourseChart } from '@/charts/course';
 import { courseLessons, courseModules } from '@/data/course';
 import { useCourseStore } from '@/stores/course';
+import { useScrollReset } from '@/hooks/use-scroll-reset';
 
 export const CoursePage = () => {
   const {
@@ -31,6 +32,9 @@ export const CoursePage = () => {
   const nextLesson = courseLessons[lessonIndex + 1];
   const lessonCompleted = completedLessons.includes(lesson.id);
   const chart = createCourseChart(lesson, experimentValue);
+
+  useScrollReset(activeLesson);
+
   const completeAndAdvance = () => {
     completeLesson();
     if (nextLesson) {
