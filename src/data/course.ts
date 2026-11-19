@@ -1,5 +1,21 @@
 import type { LessonId } from '@/stores/course-store';
 
+export type LessonKind =
+  | 'signal'
+  | 'sampling'
+  | 'aliasing'
+  | 'frequency'
+  | 'spectrum'
+  | 'lowpass'
+  | 'highpass'
+  | 'response'
+  | 'impulse'
+  | 'windows'
+  | 'discrete'
+  | 'continuous'
+  | 'iir'
+  | 'phase';
+
 export type Lesson = {
   id: LessonId;
   title: string;
@@ -9,7 +25,7 @@ export type Lesson = {
   formula: string;
   prompt: string;
   control: string;
-  kind: string;
+  kind: LessonKind;
 };
 
 export type CourseModule = {

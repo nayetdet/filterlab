@@ -1,10 +1,10 @@
 import { useRef } from 'react';
-import CourseLesson from '@/components/course/lesson/course-lesson';
+import LessonContent from '@/components/course/lesson/content';
 import CourseMap from '@/components/course/navigation/course-map';
-import { createCourseChartData } from '@/data/course-chart';
-import { courseLessons, courseModules } from '@/data/course-content';
+import { createCourseChartData } from '@/charts/course';
+import { courseLessons, courseModules } from '@/data/course';
 import { useCourseStore } from '@/stores/course-store';
-import { useCourseMapHeight } from '@/hooks/use-course-map-height';
+import { useMapHeight } from '@/hooks/use-map-height';
 
 export const CoursePage = () => {
   const {
@@ -12,50 +12,38 @@ export const CoursePage = () => {
     completedLessons,
     experimentValue,
     selectLesson,
-    completeActivity,
+    completeLesson,
     setExperimentValue,
   } = useCourseStore();
   const courseMapRef = useRef<HTMLElement>(null);
   const lessonContentRef = useRef<HTMLElement>(null);
   const lessonConclusionRef = useRef<HTMLDivElement>(null);
-  const lessonIndex = Math.max(
-    0,
-    courseLessons.findIndex((lesson) => lesson.id === activeLesson),
+  const lesson =
+    courseLessons.find((item) => item.id === activeLesson) ?? courseLessons[0];
+  if (!lesson) {
+    throw new Error('The course has no lessons.');
+  }
+  const lessonIndex = courseLessons.indexOf(lesson);
+  const currentModule = courseModules.find((module) =>
+    module.lessons.includes(lesson),
   );
-  const lesson = courseLessons[lessonIndex] ?? {
-    id: 'signals' as const,
-    title: 'Sinais contínuos e discretos',
-    concept: '',
-    intuition: '',
-    consequence: '',
-    formula: '',
-    prompt: '',
-    control: '',
-    kind: 'signal',
-  };
-  const moduleIndex = courseModules.findIndex((module) =>
-    module.lessons.some((item) => item.id === lesson.id),
-  );
-  const currentModule = courseModules[moduleIndex] ?? {
-    title: '',
-    summary: '',
-    lessons: [lesson],
-  };
-  const moduleLessonIndex = currentModule.lessons.findIndex(
-    (item) => item.id === lesson.id,
-  );
+  if (!currentModule) {
+    throw new Error('The lesson is not assigned to a course module.');
+  }
+  const moduleIndex = courseModules.indexOf(currentModule);
+  const moduleLessonIndex = currentModule.lessons.indexOf(lesson);
   const previousLesson = courseLessons[lessonIndex - 1];
   const nextLesson = courseLessons[lessonIndex + 1];
   const lessonCompleted = completedLessons.includes(lesson.id);
   const chartData = createCourseChartData(lesson.kind, experimentValue);
   const completeAndAdvance = () => {
-    completeActivity();
+    completeLesson();
     if (nextLesson) {
       selectLesson(nextLesson.id);
     }
   };
 
-  useCourseMapHeight(courseMapRef, lessonContentRef, lessonConclusionRef);
+  useMapHeight(courseMapRef, lessonContentRef, lessonConclusionRef);
 
   return (
     <main className="mx-auto grid w-full max-w-[1240px] gap-8 px-5 py-7 sm:px-8 lg:grid-cols-[280px_minmax(0,1fr)] lg:py-10">
@@ -65,7 +53,7 @@ export const CoursePage = () => {
         currentModuleIndex={moduleIndex}
         onSelectLesson={selectLesson}
       />
-      <CourseLesson
+      <LessonContent
         articleRef={lessonContentRef}
         conclusionRef={lessonConclusionRef}
         lesson={lesson}

@@ -1,23 +1,23 @@
 import { Check, ChevronDown } from 'lucide-react';
-import { useLayoutEffect, useRef, useState } from 'react';
-import { courseLessons, courseModules } from '@/data/course-content';
+import { useEffect, useRef, useState } from 'react';
+import { courseLessons, courseModules } from '@/data/course';
 import type { LessonId } from '@/stores/course-store';
 
-type CourseModuleListProps = {
+type ModuleListProps = {
   activeLesson: LessonId;
   completedLessons: LessonId[];
   onSelectLesson: (lessonId: LessonId) => void;
 };
 
-export const CourseModuleList = ({
+export const ModuleList = ({
   activeLesson,
   completedLessons,
   onSelectLesson,
-}: CourseModuleListProps) => {
+}: ModuleListProps) => {
   const [hasMoreBelow, setHasMoreBelow] = useState(false);
   const listRef = useRef<HTMLElement>(null);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const list = listRef.current;
     if (!list) {
       return undefined;
@@ -65,9 +65,7 @@ export const CourseModuleList = ({
             </header>
             <div className="space-y-1">
               {module.lessons.map((item) => {
-                const lessonIndex = courseLessons.findIndex(
-                  (lesson) => lesson.id === item.id,
-                );
+                const lessonIndex = courseLessons.indexOf(item);
                 const complete = completedLessons.includes(item.id);
                 const selected = activeLesson === item.id;
 
@@ -113,4 +111,4 @@ export const CourseModuleList = ({
   );
 };
 
-export default CourseModuleList;
+export default ModuleList;

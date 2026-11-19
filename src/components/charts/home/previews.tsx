@@ -1,7 +1,7 @@
 import { Line, LineChart, ResponsiveContainer, XAxis, YAxis } from 'recharts';
-import { previewCharts } from '@/data/home-content';
+import { previewCharts } from '@/charts/home';
 
-export const HomeChartPreviews = () => (
+export const ChartPreviews = () => (
   <section className="mt-20">
     <div className="mb-7 max-w-2xl">
       <p className="text-sm font-semibold text-muted-foreground">
@@ -70,4 +70,4 @@ export const HomeChartPreviews = () => (
   </section>
 );
 
-export default HomeChartPreviews;
+export default ChartPreviews;

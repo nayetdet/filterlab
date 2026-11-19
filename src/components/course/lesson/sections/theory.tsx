@@ -1,5 +1,5 @@
-import type { Lesson } from '@/data/course-content';
-import LessonFormula from '@/components/course/lesson/lesson-formula';
+import type { Lesson } from '@/data/course';
+import LessonFormula from '@/components/course/lesson/sections/formula';
 
 type LessonTheoryProps = { lesson: Lesson };
 

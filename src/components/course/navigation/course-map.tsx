@@ -1,10 +1,10 @@
 import { RotateCcw } from 'lucide-react';
 import { useState, type Ref } from 'react';
 import { Button } from '@/components/ui/button';
-import CourseModuleList from '@/components/course/navigation/course-module-list';
-import CourseProgress from '@/components/course/navigation/course-progress';
-import ResetCourseDialog from '@/components/course/navigation/reset-course-dialog';
-import { courseLessons } from '@/data/course-content';
+import ModuleList from '@/components/course/navigation/module-list';
+import ModuleProgress from '@/components/course/navigation/module-progress';
+import ResetProgressDialog from '@/components/course/navigation/reset-progress-dialog';
+import { courseLessons } from '@/data/course';
 import { useCourseStore, type LessonId } from '@/stores/course-store';
 
 export type CourseMapProps = {
@@ -21,7 +21,7 @@ export const CourseMap = ({
   onSelectLesson,
 }: CourseMapProps) => {
   const completedLessons = useCourseStore((state) => state.completedLessons);
-  const resetCourse = useCourseStore((state) => state.resetCourse);
+  const resetProgress = useCourseStore((state) => state.resetProgress);
   const [resetPending, setResetPending] = useState(false);
 
   return (
@@ -41,19 +41,19 @@ export const CourseMap = ({
           <RotateCcw /> Reiniciar
         </Button>
       </div>
-      <ResetCourseDialog
+      <ResetProgressDialog
         open={resetPending}
         onOpenChange={setResetPending}
         onConfirm={() => {
-          resetCourse();
+          resetProgress();
           setResetPending(false);
         }}
       />
-      <CourseProgress
+      <ModuleProgress
         completedLessons={completedLessons}
         currentModuleIndex={currentModuleIndex}
       />
-      <CourseModuleList
+      <ModuleList
         activeLesson={activeLesson}
         completedLessons={completedLessons}
         onSelectLesson={onSelectLesson}

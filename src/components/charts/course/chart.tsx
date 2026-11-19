@@ -8,9 +8,9 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import type { CourseChartSample } from '@/data/course-chart';
+import type { CourseChartSample } from '@/charts/course';
 
-type LessonChartProps = {
+type CourseChartProps = {
   title: string;
   data: CourseChartSample[];
   dataKey: string;
@@ -18,13 +18,13 @@ type LessonChartProps = {
   reference?: boolean;
 };
 
-export const LessonChart = ({
+export const CourseChart = ({
   title,
   data,
   dataKey,
   color = '#287fbb',
   reference,
-}: LessonChartProps) => (
+}: CourseChartProps) => (
   <section className="min-w-0 rounded-xl bg-muted/30 p-3 sm:p-4">
     <h3 className="mb-2 text-sm font-semibold">{title}</h3>
     <div className="h-48 sm:h-56">
@@ -62,4 +62,4 @@ export const LessonChart = ({
   </section>
 );
 
-export default LessonChart;
+export default CourseChart;

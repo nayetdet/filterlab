@@ -1,7 +1,7 @@
 import { CheckCircle2, Sparkles } from 'lucide-react';
-import { outcomes } from '@/data/home-content';
+import { outcomes } from '@/data/home';
 
-export const HomeOutcomes = () => (
+export const LearningOutcomes = () => (
   <section className="mt-16 grid gap-8 rounded-2xl bg-zinc-950 p-6 text-zinc-50 sm:p-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
     <div>
       <div className="flex items-center gap-3">
@@ -25,4 +25,4 @@ export const HomeOutcomes = () => (
   </section>
 );
 
-export default HomeOutcomes;
+export default LearningOutcomes;

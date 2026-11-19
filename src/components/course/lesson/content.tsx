@@ -1,12 +1,12 @@
 import type { Ref } from 'react';
-import type { CourseModule, Lesson } from '@/data/course-content';
-import type { CourseChartSample } from '@/data/course-chart';
-import CourseNavigation from '@/components/course/navigation/course-navigation';
-import LessonExperiment from '@/components/course/lesson/lesson-experiment';
-import LessonHeader from '@/components/course/lesson/lesson-header';
-import LessonTheory from '@/components/course/lesson/lesson-theory';
+import type { CourseModule, Lesson } from '@/data/course';
+import type { CourseChartSample } from '@/charts/course';
+import LessonNavigation from '@/components/course/navigation/lesson-navigation';
+import LessonExperiment from '@/components/course/lesson/sections/experiment';
+import LessonHeader from '@/components/course/lesson/sections/header';
+import LessonTheory from '@/components/course/lesson/sections/theory';
 
-type CourseLessonProps = {
+type LessonContentProps = {
   articleRef: Ref<HTMLElement>;
   conclusionRef: Ref<HTMLDivElement>;
   lesson: Lesson;
@@ -35,7 +35,7 @@ const getLessonDescription = (completed: boolean, hasNext: boolean) => {
   return 'Você concluiu o percurso.';
 };
 
-export const CourseLesson = ({
+export const LessonContent = ({
   articleRef,
   conclusionRef,
   lesson,
@@ -52,7 +52,7 @@ export const CourseLesson = ({
   onPrevious,
   onComplete,
   onNext,
-}: CourseLessonProps) => (
+}: LessonContentProps) => (
   <article ref={articleRef} className="min-w-0">
     <LessonHeader
       lesson={lesson}
@@ -72,7 +72,7 @@ export const CourseLesson = ({
       ref={conclusionRef}
       className="mt-8 flex min-h-[88px] flex-wrap items-center justify-between gap-4 rounded-xl bg-muted/50 p-5"
     >
-      <CourseNavigation
+      <LessonNavigation
         description={getLessonDescription(lessonCompleted, hasNext)}
         lessonCompleted={lessonCompleted}
         hasPrevious={hasPrevious}
@@ -85,4 +85,4 @@ export const CourseLesson = ({
   </article>
 );
 
-export default CourseLesson;
+export default LessonContent;

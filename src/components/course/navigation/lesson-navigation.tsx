@@ -1,7 +1,7 @@
 import { ArrowLeft, ArrowRight, Check } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
-type CourseNavigationProps = {
+type LessonNavigationProps = {
   description: string;
   lessonCompleted: boolean;
   hasPrevious: boolean;
@@ -11,7 +11,7 @@ type CourseNavigationProps = {
   onNext: () => void;
 };
 
-export const CourseNavigation = ({
+export const LessonNavigation = ({
   description,
   lessonCompleted,
   hasPrevious,
@@ -19,7 +19,7 @@ export const CourseNavigation = ({
   onPrevious,
   onComplete,
   onNext,
-}: CourseNavigationProps) => (
+}: LessonNavigationProps) => (
   <div className="flex w-full flex-wrap items-center justify-between gap-4">
     <div>
       <p className="font-semibold">
@@ -54,4 +54,4 @@ export const CourseNavigation = ({
   </div>
 );
 
-export default CourseNavigation;
+export default LessonNavigation;

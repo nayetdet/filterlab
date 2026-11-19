@@ -1,6 +1,5 @@
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
-import { immer } from 'zustand/middleware/immer';
 
 export type LessonId =
   | 'signals'
@@ -18,43 +17,37 @@ export type LessonId =
   | 'iir'
   | 'phase';
 
-type LearningState = {
+type CourseState = {
   activeLesson: LessonId;
   completedLessons: LessonId[];
   experimentValue: number;
   selectLesson: (lesson: LessonId) => void;
-  completeActivity: () => void;
+  completeLesson: () => void;
   setExperimentValue: (value: number) => void;
-  resetCourse: () => void;
+  resetProgress: () => void;
 };
 
-export const useCourseStore = create<LearningState>()(
+export const useCourseStore = create<CourseState>()(
   persist(
-    immer((set) => ({
+    (set) => ({
       activeLesson: 'signals',
       completedLessons: [],
       experimentValue: 40,
-      selectLesson: (lesson) =>
-        set((state) => {
-          state.activeLesson = lesson;
+      selectLesson: (activeLesson) => set({ activeLesson }),
+      completeLesson: () =>
+        set((state) => ({
+          completedLessons: state.completedLessons.includes(state.activeLesson)
+            ? state.completedLessons
+            : [...state.completedLessons, state.activeLesson],
+        })),
+      setExperimentValue: (experimentValue) => set({ experimentValue }),
+      resetProgress: () =>
+        set({
+          activeLesson: 'signals',
+          completedLessons: [],
+          experimentValue: 40,
         }),
-      completeActivity: () =>
-        set((state) => {
-          if (!state.completedLessons.includes(state.activeLesson)) {
-            state.completedLessons.push(state.activeLesson);
-          }
-        }),
-      setExperimentValue: (value) =>
-        set((state) => {
-          state.experimentValue = value;
-        }),
-      resetCourse: () =>
-        set((state) => {
-          state.activeLesson = 'signals';
-          state.completedLessons = [];
-          state.experimentValue = 40;
-        }),
-    })),
+    }),
     {
       name: 'filterlab-learning-progress',
       storage: createJSONStorage(() => localStorage),

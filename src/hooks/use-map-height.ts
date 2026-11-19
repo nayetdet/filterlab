@@ -1,6 +1,6 @@
 import { useLayoutEffect, type RefObject } from 'react';
 
-export const useCourseMapHeight = (
+export const useMapHeight = (
   mapRef: RefObject<HTMLElement | null>,
   contentRef: RefObject<HTMLElement | null>,
   conclusionRef: RefObject<HTMLDivElement | null>,

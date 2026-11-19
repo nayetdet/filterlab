@@ -1,7 +1,7 @@
-import type { CourseChartSample } from '@/data/course-chart';
-import type { Lesson } from '@/data/course-content';
+import type { CourseChartSample } from '@/charts/course';
+import type { Lesson, LessonKind } from '@/data/course';
 import { Slider } from '@/components/ui/slider';
-import LessonChart from '@/components/course/lesson/charts/lesson-chart';
+import CourseChart from '@/components/charts/course/chart';
 
 type LessonExperimentProps = {
   lesson: Lesson;
@@ -10,10 +10,14 @@ type LessonExperimentProps = {
   onChange: (value: number) => void;
 };
 
-const hasFilterCharts = (kind: string) =>
-  ['lowpass', 'highpass', 'response', 'spectrum', 'windows', 'fir'].includes(
-    kind,
-  );
+const filterKinds: LessonKind[] = [
+  'lowpass',
+  'highpass',
+  'response',
+  'spectrum',
+  'windows',
+];
+const hasFilterCharts = (kind: LessonKind) => filterKinds.includes(kind);
 
 export const LessonExperiment = ({
   lesson,
@@ -46,8 +50,8 @@ export const LessonExperiment = ({
       </div>
     </div>
     <div className="mt-4 grid gap-4 md:grid-cols-2">
-      <LessonChart title="Sinal no tempo" data={data} dataKey="input" />
-      <LessonChart
+      <CourseChart title="Sinal no tempo" data={data} dataKey="input" />
+      <CourseChart
         title={
           lesson.kind === 'continuous'
             ? 'Sobreposição dos pulsos'
@@ -61,13 +65,13 @@ export const LessonExperiment = ({
     </div>
     {hasFilterCharts(lesson.kind) && (
       <div className="mt-4 grid gap-4 md:grid-cols-2">
-        <LessonChart
+        <CourseChart
           title="Entrada e saída"
           data={data}
           dataKey="filtered"
           color="#287fbb"
         />
-        <LessonChart
+        <CourseChart
           title="Resposta ideal de referência"
           data={data}
           dataKey="ideal"

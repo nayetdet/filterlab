@@ -7,9 +7,9 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
-import { signalData } from '@/data/home-content';
+import { signalData } from '@/charts/home';
 
-export const HomeWaveChart = () => (
+export const WaveformChart = () => (
   <figure
     aria-label="Gráfico de uma onda senoidal ao longo do tempo"
     className="min-w-0"
@@ -50,4 +50,4 @@ export const HomeWaveChart = () => (
   </figure>
 );
 
-export default HomeWaveChart;
+export default WaveformChart;

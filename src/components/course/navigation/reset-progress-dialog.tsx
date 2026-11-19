@@ -2,17 +2,17 @@ import { RotateCcw } from 'lucide-react';
 import { Dialog as DialogPrimitive } from 'radix-ui';
 import { Button } from '@/components/ui/button';
 
-type ResetCourseDialogProps = {
+type ResetProgressDialogProps = {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onConfirm: () => void;
 };
 
-export const ResetCourseDialog = ({
+export const ResetProgressDialog = ({
   open,
   onOpenChange,
   onConfirm,
-}: ResetCourseDialogProps) => (
+}: ResetProgressDialogProps) => (
   <DialogPrimitive.Root open={open} onOpenChange={onOpenChange}>
     <DialogPrimitive.Portal>
       <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-black/40" />
@@ -43,4 +43,4 @@ export const ResetCourseDialog = ({
   </DialogPrimitive.Root>
 );
 
-export default ResetCourseDialog;
+export default ResetProgressDialog;

@@ -1,7 +1,7 @@
 import { BookOpen } from 'lucide-react';
-import { courseModules } from '@/data/course-content';
+import { courseModules } from '@/data/course';
 
-export const HomeCourseRoadmap = () => (
+export const CourseRoadmap = () => (
   <section className="mt-20 pb-24">
     <div className="mb-6 flex items-end justify-between gap-4">
       <div>
@@ -39,4 +39,4 @@ export const HomeCourseRoadmap = () => (
   </section>
 );
 
-export default HomeCourseRoadmap;
+export default CourseRoadmap;

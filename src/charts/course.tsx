@@ -1,15 +1,16 @@
+import type { LessonKind } from '@/data/course';
+
 export type CourseChartSample = {
   x: number;
   input: number;
   output: number;
   ideal: number;
   filtered: number;
-  fixed: number;
   moving: number;
 };
 
 export const createCourseChartData = (
-  kind: string,
+  kind: LessonKind,
   control: number,
 ): CourseChartSample[] =>
   Array.from({ length: 101 }, (_, index) => {
@@ -25,7 +26,8 @@ export const createCourseChartData = (
       0,
       Math.min(1, 1.5 - Math.abs(x - (amount * 5 - 2.5))),
     );
-    const values: Record<string, number> = {
+
+    const values: Record<LessonKind, number> = {
       signal: tone,
       sampling: tone,
       aliasing: Math.sin(x * (amount * 5 + 0.2)),
@@ -46,10 +48,9 @@ export const createCourseChartData = (
     return {
       x,
       input: tone + second,
-      output: values[kind] ?? tone,
+      output: values[kind],
       ideal: Math.abs(x) < cutoff ? 1 : 0,
       filtered: tone * low + second * (1 - low),
-      fixed: Math.abs(x) < 2 ? 1 : 0,
       moving: Math.abs(x - (amount * 5 - 2.5)) < 2 ? 1 : 0,
     };
   });

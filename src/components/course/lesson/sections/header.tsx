@@ -1,4 +1,4 @@
-import type { CourseModule, Lesson } from '@/data/course-content';
+import type { CourseModule, Lesson } from '@/data/course';
 
 type LessonHeaderProps = {
   lesson: Lesson;

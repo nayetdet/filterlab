@@ -1,6 +1,6 @@
-import { learningSteps } from '@/data/home-content';
+import { learningSteps } from '@/data/home';
 
-export const HomeLearningSteps = () => (
+export const LearningSteps = () => (
   <section className="mt-20">
     <div className="max-w-2xl">
       <p className="text-sm font-semibold text-muted-foreground">
@@ -31,4 +31,4 @@ export const HomeLearningSteps = () => (
   </section>
 );
 
-export default HomeLearningSteps;
+export default LearningSteps;
