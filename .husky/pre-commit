@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+bun check && bun run lint-staged

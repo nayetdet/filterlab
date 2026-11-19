@@ -1,0 +1,13 @@
+{
+  "project": ["src/**/*.{ts,tsx,css}"],
+  "ignoreExportsUsedInFile": true,
+  "ignore": ["src/lib/utils.ts"],
+  "ignoreDependencies": [
+    "class-variance-authority",
+    "clsx",
+    "cn",
+    "lucide-react",
+    "radix-ui",
+    "tailwind-merge"
+  ]
+}
