@@ -12,7 +12,8 @@ export const Hero = ({ completedCount, onContinue }: HeroProps) => {
     <section className="w-full bg-neutral-100">
       <div className="mx-auto grid min-h-[calc(100svh-4rem)] w-full max-w-[1240px] items-center gap-5 px-5 py-10 sm:gap-8 sm:px-8 sm:py-14 lg:grid-cols-[0.95fr_1.05fr] lg:gap-12 lg:py-16">
         <div className="max-w-2xl">
-          <p className="text-sm font-semibold tracking-wide text-muted-foreground">
+          <p className="flex items-center gap-2 text-sm font-semibold tracking-wide text-muted-foreground">
+            <img src="/favicon.svg" alt="" className="size-5 invert" />
             FilterLab
           </p>
           <h1 className="mt-4 max-w-xl text-3xl leading-[1.05] font-semibold tracking-tighter sm:mt-5 sm:text-5xl lg:text-5xl xl:text-6xl">
