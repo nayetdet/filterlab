@@ -1,5 +1,5 @@
 import { ChevronDown, RotateCcw } from 'lucide-react';
-import { useState, type Ref } from 'react';
+import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import ModuleList from '@/components/course/navigation/module-list';
 import ModuleProgress from '@/components/course/navigation/module-progress';
@@ -8,14 +8,12 @@ import { courseLessons } from '@/data/course';
 import { useCourseStore, type LessonId } from '@/stores/course';
 
 export type CourseMapProps = {
-  mapRef: Ref<HTMLElement>;
   activeLesson: LessonId;
   currentModuleIndex: number;
   onSelectLesson: (lessonId: LessonId) => void;
 };
 
 export const CourseMap = ({
-  mapRef,
   activeLesson,
   currentModuleIndex,
   onSelectLesson,
@@ -27,8 +25,7 @@ export const CourseMap = ({
 
   return (
     <aside
-      ref={mapRef}
-      className="flex flex-col gap-6 lg:min-h-0 lg:overflow-hidden"
+      className="flex flex-col gap-6 rounded-2xl bg-muted/30 p-5 lg:min-h-0 lg:overflow-hidden"
       aria-label="Mapa do curso"
     >
       <div className="flex items-center justify-between">

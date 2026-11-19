@@ -1,5 +1,4 @@
-import { Check, ChevronDown } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { Check } from 'lucide-react';
 import { courseLessons, courseModules } from '@/data/course';
 import type { LessonId } from '@/stores/course';
 
@@ -16,42 +15,14 @@ export const ModuleList = ({
   mobileExpanded,
   onSelectLesson,
 }: ModuleListProps) => {
-  const [hasMoreBelow, setHasMoreBelow] = useState(false);
-  const listRef = useRef<HTMLElement>(null);
-
-  useEffect(() => {
-    const list = listRef.current;
-    if (!list) {
-      return undefined;
-    }
-
-    const updateScrollCue = () => {
-      setHasMoreBelow(
-        list.scrollTop + list.clientHeight < list.scrollHeight - 8,
-      );
-    };
-    const observer = new ResizeObserver(updateScrollCue);
-    observer.observe(list);
-    list.addEventListener('scroll', updateScrollCue);
-    window.addEventListener('resize', updateScrollCue);
-    updateScrollCue();
-
-    return () => {
-      observer.disconnect();
-      list.removeEventListener('scroll', updateScrollCue);
-      window.removeEventListener('resize', updateScrollCue);
-    };
-  }, []);
-
   return (
     <div
       className={`relative min-h-0 lg:flex-1 ${mobileExpanded ? 'block' : 'hidden'} lg:block`}
     >
       <nav
-        ref={listRef}
         id="course-module-list"
         aria-label="Lista de módulos e aulas"
-        className="max-h-[55svh] divide-y divide-border/70 overflow-y-auto overscroll-contain pb-3 lg:h-full lg:max-h-none lg:pr-4"
+        className="divide-y divide-border/70 pb-3"
       >
         {courseModules.map((module, moduleNumber) => (
           <section key={module.title} className="space-y-3 py-5 first:pt-0">
@@ -99,19 +70,6 @@ export const ModuleList = ({
           </section>
         ))}
       </nav>
-      {hasMoreBelow && (
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center bg-linear-to-t from-background via-background/95 to-transparent pt-8 pb-1">
-          <button
-            type="button"
-            className="pointer-events-auto flex cursor-pointer items-center gap-1.5 rounded-full bg-background/90 px-3 py-1.5 text-xs font-medium text-muted-foreground"
-            onClick={() =>
-              listRef.current?.scrollBy({ top: 180, behavior: 'smooth' })
-            }
-          >
-            <ChevronDown className="size-3.5" /> Role para ver mais aulas
-          </button>
-        </div>
-      )}
     </div>
   );
 };

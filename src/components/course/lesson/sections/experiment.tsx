@@ -26,8 +26,8 @@ export const LessonExperiment = ({
 
   return (
     <section className="mt-10" aria-labelledby="experiment-title">
-      <div className="mb-5 flex flex-wrap items-end justify-between gap-5">
-        <div className="max-w-xl">
+      <div className="mb-5 space-y-5">
+        <div>
           <p className="text-xs font-semibold tracking-[0.14em] text-muted-foreground uppercase">
             Experimento interativo
           </p>
@@ -41,7 +41,7 @@ export const LessonExperiment = ({
             {lesson.prompt}
           </p>
         </div>
-        <div className="w-full max-w-sm">
+        <div className="w-full rounded-2xl bg-muted/40 p-4 sm:p-5">
           <label
             htmlFor="lesson-control"
             className="mb-3 flex items-center justify-between gap-3 text-sm font-medium"
@@ -53,7 +53,7 @@ export const LessonExperiment = ({
                 dangerouslySetInnerHTML={renderMath(control.symbol)}
               />
             </span>
-            <span className="tabular-nums">
+            <span className="rounded-lg bg-background px-2.5 py-1 text-sm font-semibold tabular-nums">
               {displayValue} {control.unit}
             </span>
           </label>

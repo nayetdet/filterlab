@@ -1,4 +1,3 @@
-import type { Ref } from 'react';
 import type { CourseModule, Lesson } from '@/data/course';
 import type { CourseChart as CourseChartData } from '@/charts/course';
 import LessonNavigation from '@/components/course/navigation/lesson-navigation';
@@ -7,8 +6,6 @@ import LessonHeader from '@/components/course/lesson/sections/header';
 import LessonTheory from '@/components/course/lesson/sections/theory';
 
 type LessonContentProps = {
-  articleRef: Ref<HTMLElement>;
-  conclusionRef: Ref<HTMLDivElement>;
   lesson: Lesson;
   currentModule: CourseModule;
   moduleIndex: number;
@@ -36,8 +33,6 @@ const getLessonDescription = (completed: boolean, hasNext: boolean) => {
 };
 
 export const LessonContent = ({
-  articleRef,
-  conclusionRef,
   lesson,
   currentModule,
   moduleIndex,
@@ -53,7 +48,7 @@ export const LessonContent = ({
   onComplete,
   onNext,
 }: LessonContentProps) => (
-  <article ref={articleRef} className="min-w-0">
+  <article className="min-w-0">
     <LessonHeader
       lesson={lesson}
       currentModule={currentModule}
@@ -68,10 +63,7 @@ export const LessonContent = ({
       chart={chart}
       onChange={onExperimentChange}
     />
-    <div
-      ref={conclusionRef}
-      className="mt-8 flex min-h-[88px] flex-wrap items-center justify-between gap-4 rounded-xl bg-muted/50 p-5"
-    >
+    <div className="mt-8 flex min-h-[88px] flex-wrap items-center justify-between gap-4 rounded-xl bg-muted/50 p-5">
       <LessonNavigation
         description={getLessonDescription(lessonCompleted, hasNext)}
         lessonCompleted={lessonCompleted}
