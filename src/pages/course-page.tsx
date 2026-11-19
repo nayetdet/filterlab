@@ -1,6 +1,6 @@
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
-import { Check, Lock, RotateCcw } from 'lucide-react';
+import { Check, ChevronDown, RotateCcw } from 'lucide-react';
 import { useLayoutEffect, useRef, useState } from 'react';
 import {
   CartesianGrid,
@@ -13,6 +13,8 @@ import {
   YAxis,
 } from 'recharts';
 import { Button } from '@/components/ui/button';
+import CourseNavigation from '@/components/course/course-navigation';
+import ResetCourseDialog from '@/components/course/reset-course-dialog';
 import { Slider } from '@/components/ui/slider';
 import { useCourseStore, type LessonId } from '@/stores/course-store';
 
@@ -31,11 +33,15 @@ const getProgressSegments = (
       100,
     current: index === currentModuleIndex,
   }));
-const isUnlocked = (targetIndex: number, completedLessons: LessonId[]) =>
-  targetIndex === 0 ||
-  courseLessons
-    .slice(0, targetIndex)
-    .every((item) => completedLessons.includes(item.id));
+const getLessonDescription = (completed: boolean, hasNext: boolean) => {
+  if (!completed) {
+    return 'Avance para marcar esta aula como concluída.';
+  }
+  if (hasNext) {
+    return 'Continue para a próxima aula quando quiser.';
+  }
+  return 'Você concluiu o percurso.';
+};
 const chartColor = '#287fbb';
 const createChartData = (kind: string, control: number) =>
   Array.from({ length: 101 }, (_, i) => {
@@ -151,7 +157,9 @@ export const CoursePage = () => {
     resetCourse,
   } = useCourseStore();
   const [resetPending, setResetPending] = useState(false);
+  const [hasMoreLessonsBelow, setHasMoreLessonsBelow] = useState(false);
   const courseMapRef = useRef<HTMLElement>(null);
+  const courseListRef = useRef<HTMLElement>(null);
   const lessonContentRef = useRef<HTMLElement>(null);
   const lessonConclusionRef = useRef<HTMLDivElement>(null);
   const lessonIndex = Math.max(
@@ -180,13 +188,19 @@ export const CoursePage = () => {
   const moduleLessonIndex = currentModule.lessons.findIndex(
     (item) => item.id === lesson.id,
   );
+  const previousLesson = courseLessons[lessonIndex - 1];
+  const nextLesson = courseLessons[lessonIndex + 1];
+  const lessonCompleted = completedLessons.includes(lesson.id);
   const data = createChartData(lesson.kind, experimentValue);
   const progressSegments = getProgressSegments(completedLessons, moduleIndex);
-  const changeValue = (value: number) => {
-    setExperimentValue(value);
-    completeActivity();
-  };
+  const changeValue = (value: number) => setExperimentValue(value);
   const select = (id: LessonId) => selectLesson(id);
+  const completeAndAdvance = () => {
+    completeActivity();
+    if (nextLesson) {
+      selectLesson(nextLesson.id);
+    }
+  };
   const reset = () => setResetPending(true);
   useLayoutEffect(() => {
     const map = courseMapRef.current;
@@ -219,17 +233,40 @@ export const CoursePage = () => {
       map.style.minHeight = '';
     };
   }, []);
+  useLayoutEffect(() => {
+    const list = courseListRef.current;
+    if (!list) {
+      return undefined;
+    }
+
+    const updateScrollCue = () => {
+      setHasMoreLessonsBelow(
+        list.scrollTop + list.clientHeight < list.scrollHeight - 8,
+      );
+    };
+    const observer = new ResizeObserver(updateScrollCue);
+    observer.observe(list);
+    list.addEventListener('scroll', updateScrollCue);
+    window.addEventListener('resize', updateScrollCue);
+    updateScrollCue();
+
+    return () => {
+      observer.disconnect();
+      list.removeEventListener('scroll', updateScrollCue);
+      window.removeEventListener('resize', updateScrollCue);
+    };
+  }, []);
   return (
     <main className="mx-auto grid w-full max-w-[1240px] gap-8 px-5 py-7 sm:px-8 lg:grid-cols-[280px_minmax(0,1fr)] lg:py-10">
       <aside
         ref={courseMapRef}
-        className="flex flex-col gap-5 lg:min-h-0 lg:overflow-hidden"
+        className="flex flex-col gap-6 lg:min-h-0 lg:overflow-hidden"
         aria-label="Mapa do curso"
       >
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-base font-semibold">Seu percurso</p>
-            <p className="mt-1 text-xs text-muted-foreground">
+            <p className="text-lg font-semibold tracking-tight">Seu percurso</p>
+            <p className="mt-1 text-sm/5 text-muted-foreground">
               {completedLessons.length} de {courseLessons.length} aulas
               concluídas
             </p>
@@ -238,43 +275,20 @@ export const CoursePage = () => {
             <RotateCcw /> Reiniciar
           </Button>
         </div>
-        <div
-          hidden={!resetPending}
-          role="alertdialog"
-          aria-label="Confirmar reinício"
-          className="rounded-lg bg-muted p-4"
-        >
-          <p className="text-sm font-medium">
-            Apagar o progresso e reiniciar o curso?
-          </p>
-          <div className="mt-3 flex gap-2">
-            <Button
-              size="sm"
-              variant="destructive"
-              onClick={() => {
-                resetCourse();
-                setResetPending(false);
-              }}
-            >
-              Reiniciar curso
-            </Button>
-            <Button
-              size="sm"
-              variant="outline"
-              onClick={() => setResetPending(false)}
-            >
-              Cancelar
-            </Button>
-          </div>
-        </div>
-        <fieldset
-          className="grid grid-cols-6 gap-1.5 border-0 p-0"
-          aria-label="Progresso por módulo"
-        >
+        <ResetCourseDialog
+          open={resetPending}
+          onOpenChange={setResetPending}
+          onConfirm={() => {
+            resetCourse();
+            setResetPending(false);
+          }}
+        />
+        <fieldset className="grid grid-cols-6 gap-2 border-0 p-0">
+          <legend className="sr-only">Progresso por módulo</legend>
           {progressSegments.map((segment) => (
             <div
               key={segment.key}
-              className="h-2 overflow-hidden rounded-full bg-muted"
+              className="h-1.5 overflow-hidden rounded-full bg-muted"
               aria-hidden="true"
             >
               <div
@@ -284,46 +298,78 @@ export const CoursePage = () => {
             </div>
           ))}
         </fieldset>
-        <div className="space-y-5 lg:min-h-0 lg:flex-1 lg:overflow-y-auto lg:overscroll-contain lg:pr-2">
-          {courseModules.map((module) => (
-            <section key={module.title} className="space-y-1">
-              <div className="px-3">
-                <p className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
-                  {module.title}
-                </p>
-                <p className="mt-1 text-xs/5 text-muted-foreground">
-                  {module.summary}
-                </p>
-              </div>
-              {module.lessons.map((item) => {
-                const globalIndex = courseLessons.findIndex(
-                  (entry) => entry.id === item.id,
-                );
-                const locked = !isUnlocked(globalIndex, completedLessons);
-                const complete = completedLessons.includes(item.id);
-                let marker = <span>{globalIndex + 1}</span>;
-                if (complete) {
-                  marker = <Check className="size-3.5" />;
-                } else if (locked) {
-                  marker = <Lock className="size-3" />;
+        <div className="relative min-h-0 lg:flex-1">
+          <nav
+            ref={courseListRef}
+            aria-label="Lista de módulos e aulas"
+            className="divide-y divide-border/70 pb-3 lg:h-full lg:overflow-y-auto lg:overscroll-contain lg:pr-4"
+          >
+            {courseModules.map((module, moduleNumber) => (
+              <section key={module.title} className="space-y-3 py-5 first:pt-0">
+                <header className="flex items-start gap-3 px-2">
+                  <span className="pt-0.5 text-xs font-semibold text-muted-foreground tabular-nums">
+                    {String(moduleNumber + 1).padStart(2, '0')}
+                  </span>
+                  <div className="min-w-0">
+                    <h2 className="text-sm/5 font-semibold tracking-tight text-foreground">
+                      {module.title.replace(/^\d+\.\s*/, '')}
+                    </h2>
+                    <p className="mt-1 text-xs/5 text-muted-foreground">
+                      {module.summary}
+                    </p>
+                  </div>
+                </header>
+                <div className="space-y-1">
+                  {module.lessons.map((item) => {
+                    const globalIndex = courseLessons.findIndex(
+                      (entry) => entry.id === item.id,
+                    );
+                    const complete = completedLessons.includes(item.id);
+                    return (
+                      <button
+                        key={item.id}
+                        type="button"
+                        onClick={() => select(item.id)}
+                        aria-current={
+                          activeLesson === item.id ? 'step' : undefined
+                        }
+                        className={`flex w-full cursor-pointer items-start gap-3 rounded-lg px-3 py-2.5 text-left transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring ${activeLesson === item.id ? 'bg-muted/70 text-foreground' : 'text-muted-foreground hover:bg-muted/40'}`}
+                      >
+                        <span
+                          className={`mt-0.5 flex size-5 shrink-0 items-center justify-center text-xs tabular-nums ${activeLesson === item.id ? 'font-semibold text-foreground' : 'text-muted-foreground'}`}
+                        >
+                          {complete ? (
+                            <Check className="size-3.5" />
+                          ) : (
+                            globalIndex + 1
+                          )}
+                        </span>
+                        <span className="text-sm/5 font-medium">
+                          {item.title}
+                        </span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </section>
+            ))}
+          </nav>
+          {hasMoreLessonsBelow && (
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 hidden justify-center bg-linear-to-t from-background via-background/95 to-transparent pt-8 pb-1 lg:flex">
+              <button
+                type="button"
+                className="pointer-events-auto flex cursor-pointer items-center gap-1.5 rounded-full bg-background/90 px-3 py-1.5 text-xs font-medium text-muted-foreground"
+                onClick={() =>
+                  courseListRef.current?.scrollBy({
+                    top: 180,
+                    behavior: 'smooth',
+                  })
                 }
-                return (
-                  <button
-                    key={item.id}
-                    type="button"
-                    disabled={locked}
-                    onClick={() => select(item.id)}
-                    className={`flex w-full cursor-pointer items-start gap-3 rounded-lg px-3 py-2.5 text-left transition-colors ${activeLesson === item.id ? 'bg-muted text-foreground' : 'text-muted-foreground hover:bg-muted/60'} disabled:cursor-not-allowed disabled:opacity-40`}
-                  >
-                    <span className="mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full bg-background text-[11px]">
-                      {marker}
-                    </span>
-                    <span className="text-sm/5 font-medium">{item.title}</span>
-                  </button>
-                );
-              })}
-            </section>
-          ))}
+              >
+                <ChevronDown className="size-3.5" /> Role para ver mais aulas
+              </button>
+            </div>
+          )}
         </div>
       </aside>
       <article ref={lessonContentRef} className="min-w-0">
@@ -428,27 +474,18 @@ export const CoursePage = () => {
           ref={lessonConclusionRef}
           className="mt-8 flex min-h-[88px] flex-wrap items-center justify-between gap-4 rounded-xl bg-muted/50 p-5"
         >
-          <div>
-            <p className="font-semibold">
-              {completedLessons.includes(lesson.id)
-                ? 'Exploração concluída'
-                : 'Pronto para seguir?'}
-            </p>
-            <p className="mt-1 text-sm/6 text-muted-foreground">
-              {completedLessons.includes(lesson.id)
-                ? 'A próxima aula já está disponível no mapa.'
-                : 'Conclua esta exploração para liberar a próxima aula.'}
-            </p>
-          </div>
-          {!completedLessons.includes(lesson.id) && (
-            <Button
-              size="lg"
-              className="h-11 gap-2 px-5"
-              onClick={completeActivity}
-            >
-              <Check /> Concluir aula
-            </Button>
-          )}
+          <CourseNavigation
+            description={getLessonDescription(
+              lessonCompleted,
+              Boolean(nextLesson),
+            )}
+            lessonCompleted={lessonCompleted}
+            hasPrevious={Boolean(previousLesson)}
+            hasNext={Boolean(nextLesson)}
+            onPrevious={() => previousLesson && select(previousLesson.id)}
+            onComplete={completeAndAdvance}
+            onNext={() => nextLesson && select(nextLesson.id)}
+          />
         </div>
       </article>
     </main>
