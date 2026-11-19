@@ -14,7 +14,7 @@ export const Hero = ({ completedCount, onContinue }: HeroProps) => {
         <div className="max-w-2xl">
           <p className="flex items-center gap-2 text-sm font-semibold tracking-wide text-muted-foreground">
             <img src="/favicon.svg" alt="" className="size-5 invert" />
-            FilterLab
+            Wave Mage
           </p>
           <h1 className="mt-4 max-w-xl text-3xl leading-[1.05] font-semibold tracking-tighter sm:mt-5 sm:text-5xl lg:text-5xl xl:text-6xl">
             Entenda os sinais.

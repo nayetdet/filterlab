@@ -8,7 +8,7 @@ export const Brand = () => (
     <span className="grid size-9 place-items-center rounded-[10px] bg-white p-1.5">
       <img src="/favicon.svg" alt="" className="size-full invert" />
     </span>
-    FilterLab
+    Wave Mage
   </Link>
 );
 

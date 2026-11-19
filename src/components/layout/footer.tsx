@@ -12,7 +12,7 @@ export const Footer = () => (
       <hr className="mt-6 h-px border-0 bg-zinc-800" />
       <div className="flex flex-col gap-2 pt-4 text-xs text-zinc-500 sm:flex-row sm:items-center sm:justify-between">
         <p>Aprenda processamento de sinais explorando cada conceito.</p>
-        <p>© {copyrightYear} FilterLab. Todos os direitos reservados.</p>
+        <p>© {copyrightYear} Wave Mage. Todos os direitos reservados.</p>
       </div>
     </div>
   </footer>
