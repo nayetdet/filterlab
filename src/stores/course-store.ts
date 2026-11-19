@@ -19,7 +19,6 @@ export type LessonId =
   | 'phase';
 
 type LearningState = {
-  currentView: 'home' | 'course';
   activeLesson: LessonId;
   completedLessons: LessonId[];
   experimentValue: number;
@@ -27,28 +26,17 @@ type LearningState = {
   completeActivity: () => void;
   setExperimentValue: (value: number) => void;
   resetCourse: () => void;
-  openHome: () => void;
-  continueCourse: () => void;
 };
 
-export const useLearningStore = create<LearningState>()(
+export const useCourseStore = create<LearningState>()(
   persist(
     immer((set) => ({
       activeLesson: 'signals',
-      currentView: 'home',
       completedLessons: [],
       experimentValue: 40,
       selectLesson: (lesson) =>
         set((state) => {
           state.activeLesson = lesson;
-        }),
-      openHome: () =>
-        set((state) => {
-          state.currentView = 'home';
-        }),
-      continueCourse: () =>
-        set((state) => {
-          state.currentView = 'course';
         }),
       completeActivity: () =>
         set((state) => {
@@ -63,7 +51,6 @@ export const useLearningStore = create<LearningState>()(
       resetCourse: () =>
         set((state) => {
           state.activeLesson = 'signals';
-          state.currentView = 'home';
           state.completedLessons = [];
           state.experimentValue = 40;
         }),
