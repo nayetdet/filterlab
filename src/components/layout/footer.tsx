@@ -1,24 +1,32 @@
 import Brand from '@/components/common/brand';
-import type { SiteSection } from '@/types/navigation';
+import { useLearningStore } from '@/stores/learning-store';
 
-type FooterProps = { onSectionChange: (section: SiteSection) => void };
 const copyrightYear = new Date().getFullYear();
 
-export const Footer = ({ onSectionChange }: FooterProps) => (
-  <footer className="bg-zinc-900 text-zinc-50">
-    <div className="mx-auto max-w-[1320px] px-4 py-6 sm:px-6 lg:px-8">
-      <div className="flex flex-col items-start gap-2">
-        <Brand onClick={() => onSectionChange('audio')} />
-        <p className="max-w-sm text-sm/6 text-zinc-400">
-          Simulador interativo de filtros digitais e convolução.
+export const Footer = () => {
+  const openHome = useLearningStore((state) => state.openHome);
+
+  return (
+    <footer className="bg-zinc-900 text-zinc-50">
+      <div className="mx-auto max-w-[1240px] px-5 py-8 sm:px-8">
+        <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <Brand onClick={openHome} />
+            <p className="mt-3 text-sm text-zinc-400">
+              Simulador interativo de filtros digitais e convolução.
+            </p>
+          </div>
+          <p className="text-xs text-zinc-500">
+            © {copyrightYear} FilterLab. Todos os direitos reservados.
+          </p>
+        </div>
+        <hr className="mt-6 h-px border-0 bg-zinc-800" />
+        <p className="pt-4 text-xs text-zinc-500">
+          Aprenda processamento de sinais explorando cada conceito.
         </p>
       </div>
-      <hr className="my-3 h-px border-0 bg-zinc-800" />
-      <p className="text-left text-xs text-zinc-500">
-        © {copyrightYear} FilterLab. Todos os direitos reservados.
-      </p>
-    </div>
-  </footer>
-);
+    </footer>
+  );
+};
 
 export default Footer;

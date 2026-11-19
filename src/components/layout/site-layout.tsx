@@ -1,26 +1,19 @@
 import type { ReactNode } from 'react';
+import '@fontsource-variable/inter';
 import Footer from '@/components/layout/footer';
 import Navbar from '@/components/layout/navbar';
-import type { SiteSection } from '@/types/navigation';
+import { useLearningStore } from '@/stores/learning-store';
 
-type SiteLayoutProps = {
-  section: SiteSection;
-  onSectionChange: (section: SiteSection) => void;
-  children: ReactNode;
-};
+type SiteLayoutProps = { children: ReactNode };
 
-export const SiteLayout = ({
-  section,
-  onSectionChange,
-  children,
-}: SiteLayoutProps) => (
+export const SiteLayout = ({ children }: SiteLayoutProps) => (
   <div
     className="min-h-screen bg-background text-foreground"
     style={{ fontFamily: "'Inter Variable', sans-serif" }}
   >
-    <Navbar section={section} onSectionChange={onSectionChange} />
+    <Navbar onHome={useLearningStore.getState().openHome} />
     {children}
-    <Footer onSectionChange={onSectionChange} />
+    <Footer />
   </div>
 );
 
