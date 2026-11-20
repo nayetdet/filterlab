@@ -16,7 +16,10 @@ export const ResetProgressDialog = ({
   <DialogPrimitive.Root open={open} onOpenChange={onOpenChange}>
     <DialogPrimitive.Portal>
       <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-zinc-950/45 backdrop-blur-sm" />
-      <DialogPrimitive.Content className="fixed top-1/2 left-1/2 z-50 w-[calc(100%-2rem)] max-w-md -translate-1/2 rounded-3xl bg-background p-6 text-foreground shadow-2xl shadow-black/15 sm:p-8">
+      <DialogPrimitive.Content
+        className="fixed top-1/2 left-1/2 z-50 w-[calc(100%-2rem)] max-w-md -translate-1/2 rounded-2xl bg-background p-6 text-foreground shadow-xl shadow-black/10 sm:p-7"
+        style={{ fontFamily: "'Inter Variable', sans-serif" }}
+      >
         <div className="flex items-start gap-4">
           <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-muted">
             <RotateCcw className="size-5 text-foreground" aria-hidden="true" />

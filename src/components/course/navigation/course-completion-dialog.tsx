@@ -18,25 +18,28 @@ export const CourseCompletionDialog = ({
     <DialogPrimitive.Root open={open} onOpenChange={onOpenChange}>
       <DialogPrimitive.Portal>
         <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-zinc-950/45 backdrop-blur-sm" />
-        <DialogPrimitive.Content className="fixed top-1/2 left-1/2 z-50 w-[calc(100%-2rem)] max-w-lg -translate-1/2 rounded-3xl bg-background p-6 text-foreground shadow-2xl shadow-black/15 sm:p-9">
-          <div className="flex flex-col items-center text-center">
-            <span className="grid size-16 place-items-center rounded-3xl bg-muted">
-              <Award className="size-7 text-foreground" aria-hidden="true" />
+        <DialogPrimitive.Content
+          className="fixed top-1/2 left-1/2 z-50 w-[calc(100%-2rem)] max-w-md -translate-1/2 rounded-2xl bg-background p-6 text-foreground shadow-xl shadow-black/10 sm:p-7"
+          style={{ fontFamily: "'Inter Variable', sans-serif" }}
+        >
+          <div className="flex items-start gap-4">
+            <span className="grid size-12 shrink-0 place-items-center rounded-xl bg-muted">
+              <Award className="size-5 text-foreground" aria-hidden="true" />
             </span>
-            <div className="mt-5">
-              <p className="text-xs font-semibold tracking-[0.16em] text-muted-foreground uppercase">
+            <div className="pt-0.5">
+              <p className="text-xs font-semibold tracking-[0.14em] text-muted-foreground uppercase">
                 Percurso completo
               </p>
-              <DialogPrimitive.Title className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
+              <DialogPrimitive.Title className="mt-1 text-xl font-semibold tracking-tight">
                 Curso concluído!
               </DialogPrimitive.Title>
-              <DialogPrimitive.Description className="mx-auto mt-3 max-w-sm text-sm/6 text-muted-foreground">
+              <DialogPrimitive.Description className="mt-2 text-sm/6 text-muted-foreground">
                 Você chegou ao fim do curso. Os gráficos continuam disponíveis
                 para explorar e testar novas ideias.
               </DialogPrimitive.Description>
             </div>
           </div>
-          <div className="mt-8 flex flex-col gap-2 sm:flex-row sm:justify-center">
+          <div className="mt-8 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
             <DialogPrimitive.Close asChild>
               <Button className="h-11 w-full px-5 sm:w-auto" variant="outline">
                 Continuar explorando
