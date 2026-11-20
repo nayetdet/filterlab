@@ -9,6 +9,7 @@ const rootDirectory = fileURLToPath(new URL('.', import.meta.url));
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/wave-mage/',
   plugins: [
     react(),
     babel({ presets: [reactCompilerPreset()] }),

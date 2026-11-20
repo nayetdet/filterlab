@@ -4,7 +4,7 @@ import CoursePage from '@/pages/course';
 import HomePage from '@/pages/home';
 
 export const AppRoutes = () => (
-  <BrowserRouter>
+  <BrowserRouter basename={import.meta.env.BASE_URL}>
     <Layout>
       <Routes>
         <Route path="/" element={<HomePage />} />
