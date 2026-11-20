@@ -14,14 +14,21 @@ export const LearningSteps = () => (
     <div className="mt-7 grid gap-4 md:mt-8 md:grid-cols-3">
       {learningSteps.map(({ title, description, icon: Icon }, index) => (
         <article key={title} className="rounded-2xl bg-muted/40 p-5 sm:p-6">
-          <div className="flex items-start justify-between gap-4">
-            <p className="text-sm font-medium text-muted-foreground tabular-nums">
-              ETAPA {index + 1}
-            </p>
-            <Icon className="size-5 text-muted-foreground" aria-hidden="true" />
+          <div className="flex items-start gap-3">
+            <Icon
+              className="mt-1 size-5 shrink-0 text-muted-foreground"
+              aria-hidden="true"
+            />
+            <div>
+              <p className="text-sm font-medium text-muted-foreground tabular-nums">
+                ETAPA {index + 1}
+              </p>
+              <h3 className="mt-2 text-lg font-semibold">{title}</h3>
+              <p className="mt-2 text-sm/6 text-muted-foreground">
+                {description}
+              </p>
+            </div>
           </div>
-          <h3 className="mt-4 text-lg font-semibold">{title}</h3>
-          <p className="mt-2 text-sm/6 text-muted-foreground">{description}</p>
         </article>
       ))}
     </div>

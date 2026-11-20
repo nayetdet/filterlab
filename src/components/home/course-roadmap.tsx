@@ -1,9 +1,8 @@
-import { BookOpen } from 'lucide-react';
 import { courseModules } from '@/data/course';
 
 export const CourseRoadmap = () => (
   <section>
-    <div className="mb-6 flex items-end justify-between gap-4">
+    <div className="mb-6">
       <div>
         <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
           O percurso do curso
@@ -11,9 +10,6 @@ export const CourseRoadmap = () => (
         <p className="mt-2 text-muted-foreground">
           Do primeiro sinal aos filtros digitais.
         </p>
-      </div>
-      <div className="grid size-10 place-items-center rounded-full bg-muted/50">
-        <BookOpen className="size-5 text-muted-foreground" />
       </div>
     </div>
     <div className="grid gap-x-8 gap-y-0 sm:grid-cols-2 lg:grid-cols-3">

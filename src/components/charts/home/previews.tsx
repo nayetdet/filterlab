@@ -20,13 +20,7 @@ export const ChartPreviews = () => (
             key={chart.title}
             className="rounded-2xl bg-muted/40 p-5 sm:p-6"
           >
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <h3 className="font-semibold">{chart.title}</h3>
-                <p className="mt-1 text-sm/6 text-muted-foreground">
-                  {chart.description}
-                </p>
-              </div>
+            <div className="flex items-start gap-3">
               <span
                 className="grid size-9 shrink-0 place-items-center rounded-full bg-background"
                 style={{ color: chart.color }}
@@ -34,6 +28,12 @@ export const ChartPreviews = () => (
               >
                 <Icon className="size-[18px]" />
               </span>
+              <div>
+                <h3 className="font-semibold">{chart.title}</h3>
+                <p className="mt-1 text-sm/6 text-muted-foreground">
+                  {chart.description}
+                </p>
+              </div>
             </div>
             <div className="mt-4 h-40 sm:h-44">
               <ResponsiveContainer width="100%" height="100%">
